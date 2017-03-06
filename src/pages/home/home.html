@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Epsick Admin
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row wrap>
+      <ion-col width-50 *ngFor="let ft of ftList">
+        <ion-card>
+          <img [src]="ft.mainPictureSecure" class="ft-image"/>
+          <ion-card-content>
+            <ion-card-title>
+              {{ft.nombre}}
+              </ion-card-title>
+            <p>
+              {{ft.desc}}
+            </p>
+          </ion-card-content>
+          <div class="actions-card">
+            <button ion-button clear small color="secondary" (click)="enterProduction(productionPage, ft.id)" icon-left>
+              <ion-icon name='list'></ion-icon>
+              Intefáz Producción
+            </button>
+            <button ion-button clear small color="secondary" (click)="openChangePosition(ft.id)" icon-left>
+              <ion-icon name='map'></ion-icon>
+              Cambiar Posición
+            </button>
+            <button ion-button clear small color="secondary" (click)="goManualOrder(ft.id, ft.nombre)" icon-left>
+              <ion-icon name='basket'></ion-icon>
+              Orden Manual
+            </button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

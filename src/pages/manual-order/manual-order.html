@@ -1,0 +1,38 @@
+<!--
+  Generated template for the ManualOrder page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>{{ft_name || 'Cargando Foodtruck...'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <button ion-button block color="secondary" (click)="buy()">
+    <ion-icon name="cart" style="margin-right: 1rem;"></ion-icon>
+    Confirmar Orden
+  </button>
+  <ion-card *ngFor="let cat of cat_list; let index_cat = index;" [attr.data-index]="index_cat">
+    <ion-card-header>
+      {{cat.name}}
+    </ion-card-header>
+    <ion-card-content>
+      <ul>
+        <li *ngFor="let prod of cat.productos; let index_prod = index;" [attr.data-index]="index_prod">
+          <strong>{{prod.name}}</strong> <em>${{prod.price | currency:'MXN'}}</em>
+          <div>
+            <button ion-icon icon-only (click)="addProd(prod.id, -1, index_cat, index_prod)"><ion-icon name="remove"></ion-icon></button>
+            <strong>{{prod.quantity || 0}}</strong>
+            <button ion-icon icon-only (click)="addProd(prod.id, 1, index_cat, index_prod)"><ion-icon name="add"></ion-icon></button>
+          </div>
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

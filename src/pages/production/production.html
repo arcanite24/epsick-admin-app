@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Producción</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50 style="border-right: 1px solid #eee; padding-right: 1rem;">
+        <h3 class="heading">Preparación:</h3>
+        <ion-card *ngFor="let orden of listaPreparacion; let i = index" [attr.data-index]="i">
+          <ion-card-header>
+            <strong>Nombre: </strong> {{orden.nameCustomer}} <br>
+            <strong>Fecha: </strong> {{orden.timeAdded | date:'medium'}} <br>
+            <strong>Número de Orden: </strong> {{orden.number ? orden.number : 'No asignado.'}}
+          </ion-card-header>
+          <ion-card-content>
+            <ul>
+              <li *ngFor="let prod of orden.productsList.productos"><strong>x{{prod.quantity}}</strong> {{prod.name}} - ${{prod.price | currency:'MXN'}}</li>
+            </ul>
+          </ion-card-content>
+          <div class="order-controls">
+            <button ion-button clear small color="success" (click)="moveToEntrega(orden.id, i)" icon-left>
+              <ion-icon name='done-all'></ion-icon>
+              Lista para entregar
+            </button>
+            <button ion-button clear small color="danger" icon-left (click)="removeOrder(1, orden.id, i)">
+              <ion-icon name='close-circle'></ion-icon>
+              Cancelar
+            </button>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col width-50 style="margin-left: 1rem;">
+        <h3 class="heading">Listo para entregar:</h3>
+        <ion-card *ngFor="let orden of listaEntrega; let i = index" [attr.data-index]="i">
+          <ion-card-header>
+            <strong>Nombre: </strong> {{orden.nameCustomer}} <br>
+            <strong>Fecha: </strong> {{orden.timeAdded | date:'medium'}} <br>
+            <strong>Número de Orden: </strong> {{orden.number ? orden.number : 'No asignado.'}}
+          </ion-card-header>
+          <ion-card-content>
+            <ul>
+              <li *ngFor="let prod of orden.productsList.productos"><strong>x{{prod.quantity}}</strong> {{prod.name}} - ${{prod.price | currency:'MXN'}}</li>
+            </ul>
+          </ion-card-content>
+          <div class="order-controls">
+            <button ion-button clear small color="success" (click)="entregarOrden(orden.id, i)" icon-left>
+              <ion-icon name='done-all'></ion-icon>
+              Entregar
+            </button>
+            <button ion-button clear small color="danger" icon-left (click)="removeOrder(2, orden.id, i)">
+              <ion-icon name='close-circle'></ion-icon>
+              Cancelar
+            </button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
