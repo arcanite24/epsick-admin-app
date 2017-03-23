@@ -16,12 +16,14 @@ export class ProductionPage {
   public listaPreparacion: Array<any> = [];
   listaEntrega: Array<any> = [];
   room_name: string;
+  loader: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public load: LoadingController, public back: Back, public toast: ToastController, public auth: Auth, public chRef: ChangeDetectorRef, public zone: NgZone) {
     this.ft_id = navParams.get('id');
     this.listaEntrega = [];
     this.listaPreparacion = [];
     this.room_name = this.ft_id;
+    this.loader = false;
 
 
     /*Socket Logic
@@ -89,24 +91,28 @@ export class ProductionPage {
   }
 
   moveToEntrega(id: string, i: number) {
+    this.loader = true;
     this.back.moveToEntrega(id).subscribe(
       data => {
-        console.log(data);
-        
+        this.loader = false;
         this.listaPreparacion.splice(i, 1);
         this.toast.create({message: 'Orden movida a entrega.', duration: 1000}).present();
       }, err => {
+        this.loader = false;
         this.toast.create({message: 'No se pudo mover la orden a entrega.', duration: 1000}).present();
       }
     );
   }
 
   entregarOrden(id: string, i: number) {
+    this.loader = true;
     this.back.entregarOrden(id).subscribe(
       data => {
+        this.loader = false;
         this.listaEntrega.splice(i, 1);
         this.toast.create({message: 'Orden entregada.', duration: 1000}).present();
       }, err => {
+        this.loader = false;
         this.toast.create({message: 'No se pudo entregar la orden.', duration: 1000}).present();
       }
     )
@@ -115,23 +121,29 @@ export class ProductionPage {
   removeOrder(type: number, id: string, i: number) {
     switch (type) {
       case 1:
+        this.loader = true;
         this.back.cancelOrder(id).subscribe(
           data => {
             this.listaPreparacion.splice(i, 1);
             this.toast.create({message: 'Orden cancelada.', duration: 1000}).present();
+            this.loader = false;
           }, err => {
             this.toast.create({message: 'No se pudo cancelar la orden.', duration: 1000}).present();
+            this.loader = false;
           }
         );
         break;
 
       case 2:
+        this.loader = true;
         this.back.cancelOrder(id).subscribe(
           data => {
             this.listaEntrega.splice(i, 1);
             this.toast.create({message: 'Orden cancelada.', duration: 1000}).present();
+            this.loader = false;
           }, err => {
             this.toast.create({message: 'No se pudo cancelar la orden.', duration: 1000}).present();
+            this.loader = false;
           }
         );
         break;

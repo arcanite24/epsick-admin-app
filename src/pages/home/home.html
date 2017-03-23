@@ -10,6 +10,31 @@
 </ion-header>
 
 <ion-content>
+  <ion-card class="ft-card" *ngFor="let ft of ftList">
+    <img [src]="ft.mainPictureSecure" class="ft-image"/>
+    <div class="ft-content">
+      <h1 style="color: rgba(0, 0, 0, 0.54); margin-bottom: 1rem">{{ft.nombre}}</h1>
+      <div class="button-container">
+        <button ion-button color="secondary" (click)="enterProduction(productionPage, ft.id)" icon-left>
+          <ion-icon name='list'></ion-icon>
+          Intefáz Producción
+        </button>
+      </div>
+      <div class="button-container">
+        <button ion-button color="secondary" (click)="openChangePosition(ft.id)" icon-left>
+          <ion-icon name='map'></ion-icon>
+          Cambiar Posición
+        </button>
+      </div>
+      <div class="button-container">
+        <button ion-button color="secondary" (click)="goManualOrder(ft.id, ft.nombre)" icon-left>
+          <ion-icon name='basket'></ion-icon>
+          Orden Manual
+        </button>
+      </div>
+    </div>
+  </ion-card>
+  <!--
   <ion-grid>
     <ion-row wrap>
       <ion-col width-50 *ngFor="let ft of ftList">
@@ -41,4 +66,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  -->
 </ion-content>

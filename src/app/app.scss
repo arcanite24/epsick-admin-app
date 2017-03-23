@@ -39,13 +39,15 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #4ba7f8;
+  background-color: #FF9800;
   width: 100%;
   padding-bottom: 1rem;
 
   .avatar {
-    margin-top: 2rem;
-    width: 40%;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
 

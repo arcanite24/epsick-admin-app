@@ -1,5 +1,5 @@
-page-home {
-
+* {
+  box-sizing: border-box;
 }
 
 .ft-image {
@@ -13,4 +13,33 @@ page-home {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.ft-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 60%;
+  }
+
+  .ft-content {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2rem;
+  }
+
+}
+
+.button-container {
+  width: 100%;
+
+  button {
+    padding: 2rem;
+  }
+
 }

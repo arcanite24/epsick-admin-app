@@ -23,11 +23,11 @@
             </ul>
           </ion-card-content>
           <div class="order-controls">
-            <button ion-button clear small color="success" (click)="moveToEntrega(orden.id, i)" icon-left>
+            <button ion-button clear small color="success" (click)="moveToEntrega(orden.id, i)" icon-left [disabled]="loader">
               <ion-icon name='done-all'></ion-icon>
               Lista para entregar
             </button>
-            <button ion-button clear small color="danger" icon-left (click)="removeOrder(1, orden.id, i)">
+            <button ion-button clear small color="danger" icon-left (click)="removeOrder(1, orden.id, i)" [disabled]="loader">
               <ion-icon name='close-circle'></ion-icon>
               Cancelar
             </button>
@@ -48,11 +48,11 @@
             </ul>
           </ion-card-content>
           <div class="order-controls">
-            <button ion-button clear small color="success" (click)="entregarOrden(orden.id, i)" icon-left>
+            <button ion-button clear small color="success" (click)="entregarOrden(orden.id, i)" icon-left [disabled]="loader">
               <ion-icon name='done-all'></ion-icon>
               Entregar
             </button>
-            <button ion-button clear small color="danger" icon-left (click)="removeOrder(2, orden.id, i)">
+            <button ion-button clear small color="danger" icon-left (click)="removeOrder(2, orden.id, i)" [disabled]="loader">
               <ion-icon name='close-circle'></ion-icon>
               Cancelar
             </button>
