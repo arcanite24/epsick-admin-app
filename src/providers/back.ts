@@ -53,11 +53,16 @@ export class Back {
   }
 
   confirmarCompra(order: any) {
+    order.origin = 'app_admin';
     return this.http.post(this.api_endpoint + 'api/main/solicitarPagoCrearRegistro', {order: order}).map(res => res.json());
   }
 
   changePosition(lat, lng, id: string) {
     return this.http.post(this.api_endpoint + 'api/foodtruck/changePosition', {id: id, lng: lng, lat: lat}).map(res => res.json());
+  }
+
+  toggleAbierto(id: string, bool: boolean) {
+    return this.http.post(this.api_endpoint + 'api/foodtruck/toggleAbierto', {id: id, abierto: bool}).map(res => res.json());
   }
 
 }

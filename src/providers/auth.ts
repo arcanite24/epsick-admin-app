@@ -19,7 +19,7 @@ export class Auth {
   public session_id: string;
 
   constructor(public http: Http, public storage: Storage) {
-    this.api_endpoint = 'http://admin.epsick.com/';
+    this.api_endpoint = 'https://admin.epsick.com/';
   }
 
   setCurrentUser(user: any, token: string, ) {

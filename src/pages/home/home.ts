@@ -36,6 +36,18 @@ export class HomePage {
     this.navCtrl.push(page, {id: id});
   }
 
+  toggleAbierto(id: string, bool: boolean, i) {
+    let loader = this.load.create({content: 'Cambiando status...'});
+    loader.present();
+    this.back.toggleAbierto(id, bool).subscribe(
+      data => {
+        this.ftList[i].abierto = bool;
+        loader.dismiss();
+      },
+      err => loader.dismiss()
+    );
+  }
+
   openChangePosition(id: string) {
     let alert = this.alert.create({
       title: '¿Estás seguro?',
@@ -83,6 +95,10 @@ export class HomePage {
     this.back.getFoodtruckAdmin(this.auth.user_id).subscribe(
       data => {
         this.ftList = data;
+        this.ftList.map(ft => {
+          if(!ft.abierto) ft.abierto = false;
+          return ft;
+        });
         loader.dismiss();
       },
       err => {

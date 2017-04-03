@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="ft-card" *ngFor="let ft of ftList">
+  <ion-card class="ft-card" *ngFor="let ft of ftList; let i = index" [attr.data-index]="i">
     <img [src]="ft.mainPictureSecure" class="ft-image"/>
     <div class="ft-content">
       <h1 style="color: rgba(0, 0, 0, 0.54); margin-bottom: 1rem">{{ft.nombre}}</h1>
@@ -32,39 +32,18 @@
           Orden Manual
         </button>
       </div>
+      <div class="button-container" *ngIf="!ft.abierto">
+        <button ion-button color="secondary" (click)="toggleAbierto(ft.id, true, i)" icon-left>
+          <ion-icon name='basket'></ion-icon>
+          Abrir FoodTruck
+        </button>
+      </div>
+      <div class="button-container" *ngIf="ft.abierto">
+        <button ion-button color="danger" (click)="toggleAbierto(ft.id, false, i)" icon-left>
+          <ion-icon name='basket'></ion-icon>
+          Cerrar FoodTruck
+        </button>
+      </div>
     </div>
   </ion-card>
-  <!--
-  <ion-grid>
-    <ion-row wrap>
-      <ion-col width-50 *ngFor="let ft of ftList">
-        <ion-card>
-          <img [src]="ft.mainPictureSecure" class="ft-image"/>
-          <ion-card-content>
-            <ion-card-title>
-              {{ft.nombre}}
-              </ion-card-title>
-            <p>
-              {{ft.desc}}
-            </p>
-          </ion-card-content>
-          <div class="actions-card">
-            <button ion-button clear small color="secondary" (click)="enterProduction(productionPage, ft.id)" icon-left>
-              <ion-icon name='list'></ion-icon>
-              Intefáz Producción
-            </button>
-            <button ion-button clear small color="secondary" (click)="openChangePosition(ft.id)" icon-left>
-              <ion-icon name='map'></ion-icon>
-              Cambiar Posición
-            </button>
-            <button ion-button clear small color="secondary" (click)="goManualOrder(ft.id, ft.nombre)" icon-left>
-              <ion-icon name='basket'></ion-icon>
-              Orden Manual
-            </button>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  -->
 </ion-content>

@@ -15,7 +15,8 @@
           <ion-card-header>
             <strong>Nombre: </strong> {{orden.nameCustomer}} <br>
             <strong>Fecha: </strong> {{orden.timeAdded | date:'medium'}} <br>
-            <strong>Número de Orden: </strong> {{orden.number ? orden.number : 'No asignado.'}}
+            <strong>Número de Orden: </strong> {{orden.number ? orden.number : 'No asignado.'}} <br>
+            <strong>Origen: </strong> {{orden.origin == 'app_ft' ? 'App Consumidor' :  'Orden Manual'}}
           </ion-card-header>
           <ion-card-content>
             <ul>
@@ -41,6 +42,7 @@
             <strong>Nombre: </strong> {{orden.nameCustomer}} <br>
             <strong>Fecha: </strong> {{orden.timeAdded | date:'medium'}} <br>
             <strong>Número de Orden: </strong> {{orden.number ? orden.number : 'No asignado.'}}
+            <strong>Origen: </strong> {{orden.origin == 'app_ft' ? 'App Consumidor' :  'Orden Manual'}}
           </ion-card-header>
           <ion-card-content>
             <ul>
