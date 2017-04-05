@@ -22,7 +22,13 @@ export class MyApp {
 
   loggedUser: any;
 
-  constructor(platform: Platform, public auth: Auth, public toast: ToastController, public menu: MenuController, public http: Http) {
+  constructor(
+    platform: Platform,
+    public auth: Auth,
+    public toast:ToastController,
+    public menu: MenuController,
+    public http: Http
+  ) {
     this.loggedUser = {};
     this.auth.getCurrentUser().then(
       data => {
@@ -40,20 +46,6 @@ export class MyApp {
   goPage(page) {
     this.menu.close();
     this.nav.push(page);
-  }
-
-  logout() {
-    this.auth.logout().then(
-      data => {
-        console.log(data);
-        this.toast.create({
-          message: 'Sesión cerrada correctamente.',
-          duration: 2000
-        }).present();
-        this.menu.close();
-        this.nav.setRoot(LoginPage);
-      }
-    ).catch(err => console.log(err));
   }
 
 }

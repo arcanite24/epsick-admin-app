@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Geolocation } from 'ionic-native';
-import { NavController, ToastController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, ToastController, LoadingController, AlertController, ActionSheetController } from 'ionic-angular';
 
 import { Auth } from '../../providers/auth';
 import { Back } from '../../providers/back';
 import { ProductionPage } from '../production/production';
 import { ManualOrderPage } from '../manual-order/manual-order';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -16,11 +17,14 @@ export class HomePage {
   ftList: Array<any>;
   productionPage = ProductionPage;
 
-  constructor(public navCtrl: NavController, 
-  public auth: Auth, public back: Back, 
-  public load: LoadingController, 
-  public toast: ToastController, 
-  public alert: AlertController) {
+  constructor(
+    public navCtrl: NavController, 
+    public auth: Auth, public back: Back, 
+    public load: LoadingController, 
+    public toast: ToastController, 
+    public alert: AlertController,
+    public action: ActionSheetController
+  ) {
     
   }
 
@@ -87,6 +91,34 @@ export class HomePage {
       ]
     });
     alert.present();
+  }
+
+  openMenu() {
+    let sheet = this.action.create({
+      title: 'Epsick',
+      buttons: [
+        {
+          text: 'Cerrar Sesión',
+          handler: () => {
+            this.auth.logout().then(
+              data => {
+                console.log(data);
+                this.toast.create({
+                  message: 'Sesión cerrada correctamente.',
+                  duration: 2000
+                }).present();
+                this.navCtrl.setRoot(LoginPage);
+              }
+            ).catch(err => console.log(err));
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    sheet.present();
   }
 
   ionViewWillEnter() {

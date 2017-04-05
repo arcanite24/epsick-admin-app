@@ -68,6 +68,11 @@ export class ManualOrderPage {
   }
 
   buy() {
+
+    //Debug
+    console.log(this.cat_list);
+    
+
     let loader = this.loading.create({content: 'Procesando compra...'});
     loader.present();
     this.back.procesarOrden({productos: this.order}).subscribe(
@@ -91,11 +96,11 @@ export class ManualOrderPage {
           };
           this.back.confirmarCompra(order_post).subscribe(
             data_compra => {
-              console.log('confirmarCompra: ', data_compra);              
+              //Clean cart
+              this.cat_list.forEach(cat => {
+                cat.productos.map(prod => prod.quantity = 0);
+              });
               this.toast.create({message: 'Compra concretada correctamente.', duration: 2000}).present();
-              //Reload carrito y numeros
-
-
               loader.dismiss();
             },
             err => {
